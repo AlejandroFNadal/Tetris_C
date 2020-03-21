@@ -1,10 +1,15 @@
 #include <stdio.h>
 #include <SDL2/SDL.h>
 //#include "constants.h"
-#include "loadfunc.h"
-
+//#include "loadfunc.h"
+#include "gamefunc.h"
+#define posalto 30
+#define posancho 10
 SDL_Window* window = NULL;
 SDL_Surface* screenSurface = NULL;
+SDL_Event ev_control;
+
+cuadrado matrix[posalto][posancho];
 
 
 int main()
