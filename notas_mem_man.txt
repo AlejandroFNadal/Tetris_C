@@ -1,0 +1,13 @@
+C has three types of memory managment:
+
+Automatic: Variables are declared on first use, and they are removed only
+when they are out of scope. 
+
+Static: Variables are in the same place through the life of the proogram.
+Data is initialized before main starts. Variables declared outside of functions are static. 
+
+Manual: malloc and free. 
+
+When declaring a pointer, it has a memory type, automatic or static. 
+But the pointer can point to any type of data. we can have a static pointer
+pointing to malloced data, for example

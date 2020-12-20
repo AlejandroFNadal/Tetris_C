@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <SDL2/SDL.h>
+#include <stdlib.h>
 //#include "constants.h"
 //#include "loadfunc.h"
 #include "gamefunc.h"
@@ -11,19 +12,30 @@ SDL_Surface* screenSurface = NULL;
 SDL_Event ev_control;
 SDL_Renderer* renderer = NULL; 
 
-cuadrado matrix[posalto][posancho];
 
+cuadrado matrix[posalto][posancho];
 
 int main()
 {
-    cuadrado a1;
-    a1.g=230;
-    matrix[0][0]=a1;
+    int x, y;
+    //empty matrix
+    for(x=0;x<posalto;x++)
+    {
+        for(y=0;y<posancho;y++)
+        {
+            matrix[x][y].r=0;
+            matrix[x][y].g=0;
+            matrix[x][y].b=0;
+            matrix[x][y].active=false;
+            matrix[x][y].moving=false;
+        }
+    }
+    
     if( SDL_Init(SDL_INIT_VIDEO) < 0)
     {
         printf("SDL cannot initialize, SDL_Error: %s\n",SDL_GetError());
     }
-    //crear_ventana(window,screenSurface, renderer);
+    
     
     
     window = SDL_CreateWindow("Tetris",SDL_WINDOWPOS_UNDEFINED,SDL_WINDOWPOS_UNDEFINED,width,height,SDL_WINDOW_SHOWN);
@@ -32,15 +44,11 @@ int main()
         printf("Render error");
     SDL_SetRenderDrawColor(renderer,100,100,100,255);
     SDL_RenderClear(renderer);
-    //int x = 1;
-    //int y = 1;
-    //SDL_SetRenderDrawColor(renderer,255,0,0,255);
-     //SDL_Rect temp_r={x*cuadrado_ancho +100,y*cuadrado_alto + 100,cuadrado_ancho,cuadrado_alto};
-    //printf("Rect x %d Rect y %d Rect w %d Rect %d ",x*cuadrado_ancho +100,y*cuadrado_alto + 100,cuadrado_ancho,cuadrado_alto);
-    //dibujar cuadrado aqui
-    //SDL_RenderFillRect(renderer, &temp_r);
-    //crear_cuadrado(5,5,255,0,0,matrix);
-    //crear_cuadrado(6,6,255,255,0,matrix);
+    
+    borders(renderer);
+    create_random_block(matrix);
+    gravity(matrix);
+
     dibujar_matriz(renderer,matrix);
     SDL_RenderPresent(renderer);
     

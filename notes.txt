@@ -1,0 +1,4 @@
+
+Create rectangle of game border
+First, create random block at top
+Make it fall
