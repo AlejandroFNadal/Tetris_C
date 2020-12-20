@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <SDL2/SDL.h>
 #include <stdlib.h>
-//#include "constants.h"
-//#include "loadfunc.h"
+#include <stdbool.h>
+#include <time.h>
 #include "gamefunc.h"
 #define posalto 30
 #define posancho 10
@@ -17,7 +17,9 @@ cuadrado matrix[posalto][posancho];
 
 int main()
 {
+    time_t t;
     int x, y;
+    srand((unsigned)time(&t));
     //empty matrix
     for(x=0;x<posalto;x++)
     {
@@ -46,11 +48,37 @@ int main()
     SDL_RenderClear(renderer);
     
     borders(renderer);
-    create_random_block(matrix);
-    gravity(matrix);
-
-    dibujar_matriz(renderer,matrix);
     SDL_RenderPresent(renderer);
+    int n = 0;
+    bool falling= true;
+    
+    while(n < 20)
+    {
+        printf("%d\n",n);
+        create_random_block(matrix);
+        dibujar_matriz(renderer,matrix);
+        SDL_RenderPresent(renderer);
+        SDL_Delay(200);
+        SDL_SetRenderDrawColor(renderer,100,100,100,255);
+        SDL_RenderClear(renderer);
+        while(falling == true)
+        {
+            falling = gravity(matrix);
+            detect_full_bottom(matrix);
+            SDL_SetRenderDrawColor(renderer,255,255,255,255);
+            dibujar_matriz(renderer,matrix);
+            SDL_RenderPresent(renderer);
+            SDL_Delay(200);
+            SDL_SetRenderDrawColor(renderer,100,100,100,255);
+            SDL_RenderClear(renderer);
+        }
+        falling=true;
+        n++;
+        SDL_Delay(10);
+    }
+    
+
+    
     
    
     //Wait two seconds

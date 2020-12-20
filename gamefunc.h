@@ -15,8 +15,33 @@ struct cuadrado{
 
 typedef struct cuadrado cuadrado;
 
-void gravity(cuadrado mat[posancho][posalto])
+void detect_full_bottom(cuadrado mat[posancho][posalto])
 {
+    bool eliminate = true;
+    for(int x = 0; x < posancho;x++)
+    {
+        printf("Detecting full bottom\n");
+        printf("Pos x %d \n",x);
+        if(mat[x][posalto-1].active==false)
+        {
+            eliminate = false;
+            break;
+        }
+    }
+    if(eliminate == true)
+    {
+        for(int x = 0; x < posancho;x++)
+        {
+            mat[x][posalto-1].active=false;
+            mat[x][posalto-1].r=0;
+            mat[x][posalto-1].b=0;
+            mat[x][posalto-1].g=0;
+        }
+    }
+}
+bool gravity(cuadrado mat[posancho][posalto])
+{
+    bool move_occur = false;
     //these for go backwards because if not, when a series of blocks must go down, those below that should move will 
     //move after those above and cause movement problems
     for(int x =posancho; x>=0 ;x--)
@@ -25,9 +50,9 @@ void gravity(cuadrado mat[posancho][posalto])
         {
             if(mat[x][y].active == true)
             {
-                if(y < posalto || mat[x][y+1].active ==false)
+                if(y < posalto-1 && mat[x][y+1].active ==false)
                 {
-                    
+                    printf("Move down in %d %d\n", x,y);
                     //CREATE DEACTIVATE FUNCTION FOR THIS
                     mat[x][y+1].active = true;
                     mat[x][y+1].r=mat[x][y].r;
@@ -38,10 +63,12 @@ void gravity(cuadrado mat[posancho][posalto])
                     mat[x][y].g=0;
                     mat[x][y].active=false;
                     mat[x][y].moving=false;
+                    move_occur=true;
                 }
             }
         }
     }
+    return move_occur;
 }
 void borders(SDL_Renderer* renderer)
 {
@@ -76,11 +103,8 @@ void dibujar_matriz(SDL_Renderer *renderer,cuadrado mat[posalto][posancho])
     {
         for(y=0;y<posalto;y++)
         {
-            if(mat[x][y].active == true)
-            {
-            
             SDL_SetRenderDrawColor(renderer,mat[x][y].r,mat[x][y].g,mat[x][y].b,255);
-            SDL_Rect temp_r={x*cuadrado_ancho +100,y*cuadrado_ancho + 100,cuadrado_ancho,cuadrado_ancho};
+            SDL_Rect temp_r={x*cuadrado_ancho +100,y*cuadrado_alto + 100,cuadrado_ancho,cuadrado_alto};
             //dibujar cuadrado aqui
             if(renderer == NULL)
             {
@@ -88,7 +112,6 @@ void dibujar_matriz(SDL_Renderer *renderer,cuadrado mat[posalto][posancho])
             }
             SDL_RenderFillRect(renderer, &temp_r);
             SDL_Delay(1);
-            }
         }
     }
     
