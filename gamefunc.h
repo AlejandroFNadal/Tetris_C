@@ -12,9 +12,28 @@ struct cuadrado{
     bool active;
     bool moving;
 };
-
 typedef struct cuadrado cuadrado;
+//line struct contains the four cubes that make a line
+struct line{
+    cuadrado *first;
+    cuadrado *second;
+    cuadrado *third;
+    cuadrado *fourth;    
+};
 
+typedef struct line line;
+
+//Prototypes
+
+void crear_cuadrado(int x,int y,int r, int g, int b, cuadrado mat[posalto][posancho]);
+
+void create_line(cuadrado mat[posancho][posalto])
+{
+    crear_cuadrado(posancho/2, 0, 255,255,255,mat);
+    crear_cuadrado(posancho/2, 1, 255,255,255,mat);
+    crear_cuadrado(posancho/2, 2, 255,255,255,mat);
+    crear_cuadrado(posancho/2, 3, 255,255,255,mat);
+}
 void detect_full_bottom(cuadrado mat[posancho][posalto])
 {
     bool eliminate = true;
@@ -80,7 +99,7 @@ void borders(SDL_Renderer* renderer)
 
 }
 
-void crear_cuadrado(int x,int y,int r, int g, int b, cuadrado mat[posalto][posancho]);
+
 
 void create_random_block(cuadrado mat[posalto][posancho])
 {

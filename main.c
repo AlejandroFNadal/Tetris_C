@@ -51,11 +51,12 @@ int main()
     SDL_RenderPresent(renderer);
     int n = 0;
     bool falling= true;
+    bool quit = false;
     
-    while(n < 20)
+    while(!quit)
     {
         printf("%d\n",n);
-        create_random_block(matrix);
+        create_line(matrix);
         dibujar_matriz(renderer,matrix);
         SDL_RenderPresent(renderer);
         SDL_Delay(200);
@@ -71,6 +72,19 @@ int main()
             SDL_Delay(200);
             SDL_SetRenderDrawColor(renderer,100,100,100,255);
             SDL_RenderClear(renderer);
+            while(SDL_PollEvent(&ev_control)){
+                if(ev_control.type == SDL_KEYDOWN)
+                {
+                    printf("Key pressed\n");
+                    if(ev_control.key.keysym.sym == SDLK_ESCAPE)
+                    {
+                        printf("Escape pressed\n");
+                        cerrar(window,screenSurface);
+                        return 0;
+                    }
+                }
+            }
+            
         }
         falling=true;
         n++;
