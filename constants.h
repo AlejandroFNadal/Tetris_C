@@ -1,8 +1,8 @@
 
 const int width = 800;
 const int height = 600;
-const int posancho=10;
-const int posalto = 10;
+const int posancho=6;
+const int posalto = 6;
 const int inimatriz_x=100;
 const int inimatriz_y=100;
 const int finmatriz_x=700;
