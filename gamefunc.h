@@ -61,7 +61,7 @@ void move(cuadrado mat[posancho][posalto], int where)
             {
                 if(mat[x][y].moving==true)
                 {
-                    if(mat[x-1][y].active==false)
+                    if(mat[x-1][y].active==false && x > 0)
                     {
                        single_move(mat,x,y,x-1,y);
                     }
