@@ -15,6 +15,8 @@ SDL_Renderer* renderer = NULL;
 
 cuadrado matrix[posalto][posancho];
 
+
+
 int main()
 {
     time_t t;
@@ -24,6 +26,7 @@ int main()
     bool quit = false;
     bool create_new_figure= true;
     srand((unsigned)time(&t));
+    bool is_line_going_down = false;
     //empty matrix
     for(x=0;x<posalto;x++)
     {
@@ -54,21 +57,23 @@ int main()
     borders(renderer);
     SDL_RenderPresent(renderer);
 
-    
+    int current_line_position[4][2];
+
     
     while(!quit)
     {
         printf("Falling %d\n", falling);
         if(!falling) // a new figure is required
         {
-            //create_line(matrix);
-            crear_cuadrado(2, 0, 255,255,255,matrix);
+            create_line(matrix,current_line_position);
+            is_line_going_down=true;
+            //crear_cuadrado(2, 0, 255,255,255,matrix);
             falling = true;
         }
         borders(renderer);
         printf("Start of loop\n");
         readMatrix(matrix);
-        falling = gravity(matrix);
+        falling = gravity2(matrix,current_line_position);
         printf("After gravity applied\n");
         readMatrix(matrix);
         detect_full_bottom(matrix);
@@ -80,7 +85,7 @@ int main()
         SDL_Delay(200);
         SDL_SetRenderDrawColor(renderer,100,100,100,255);
         SDL_RenderClear(renderer);
-        keyboard_reading(screenSurface,window, ev_control, matrix);
+        keyboard_reading(screenSurface,window, ev_control, matrix, current_line_position);
         SDL_Delay(10);
     }
     
