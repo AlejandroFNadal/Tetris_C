@@ -13,10 +13,10 @@
 
 //Prototypes
 void single_move(cuadrado mat[posancho][posalto],int x, int y, int next_x, int next_y);
-void move(cuadrado mat[posancho][posalto], int current_block[4][2], int where); //LEFT = 1, RIGHT = 2
+void move(cuadrado mat[posancho][posalto], int current_block[4][2], int where, int block_type); //LEFT = 1, RIGHT = 2
 
 
-void keyboard_reading(SDL_Surface *screenSurface, SDL_Window *window, SDL_Event ev_control, cuadrado mat[posancho][posalto], int current_block[4][2])
+void keyboard_reading(SDL_Surface *screenSurface, SDL_Window *window, SDL_Event ev_control, cuadrado mat[posancho][posalto], int current_block[4][2], int block_type)
 {
     while(SDL_PollEvent(&ev_control)){
                 if(ev_control.type == SDL_KEYDOWN)
@@ -30,21 +30,21 @@ void keyboard_reading(SDL_Surface *screenSurface, SDL_Window *window, SDL_Event 
                     }
                     if(ev_control.key.keysym.sym==SDLK_LEFT)
                     {
-                        move(mat, current_block,LEFT);
+                        move(mat, current_block,LEFT,block_type);
                     }
                     else if(ev_control.key.keysym.sym == SDLK_RIGHT)
                     {
-                    	move(mat, current_block, RIGHT);
+                    	move(mat, current_block, RIGHT,block_type);
                     }
 		    else if(ev_control.key.keysym.sym == SDLK_UP)
 		    {
-		    	move(mat,current_block,ROTATE);
+		    	move(mat,current_block,ROTATE,block_type);
 		    }
                     
                 }
             }
 }
-void move(cuadrado mat[posancho][posalto],int current_block[4][2],int where)
+void move(cuadrado mat[posancho][posalto],int current_block[4][2],int where,int block_type)
 {
     cuadrado temp_block[4];
     bool move_posible = true; //assuming this, then, checking if cannot be done
@@ -60,6 +60,11 @@ void move(cuadrado mat[posancho][posalto],int current_block[4][2],int where)
         {
             move_posible = false;
         }
+	//there are two possible directions to rotate
+	if(where == ROTATE && block_type == LINE_BLOCK && check_line_rotation(mat,current_block)==0)
+	{
+		move_posible= false;
+	}
         
     }
     if(move_posible)
@@ -80,7 +85,7 @@ void move(cuadrado mat[posancho][posalto],int current_block[4][2],int where)
                     mat[temp_x-1][temp_y]=temp_block[k]; //move block to the left
                     current_block[k][0]--; //change reference position value
                 }
-                else{
+                else if (where == RIGHT){
                     mat[temp_x+1][temp_y]=temp_block[k]; // move block to the right
                     current_block[k][0]++; // change reference position value
                 }

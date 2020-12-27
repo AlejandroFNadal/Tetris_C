@@ -25,3 +25,17 @@ line create_line(cuadrado mat[posancho][posalto], int current_line[4][2])
     a_line.fourth=crear_cuadrado(posancho/2, 3, r,g,b,mat);
     return a_line;
 }
+
+int check_line_rotation(cuadrado mat[posancho][posalto],int current_block[4][2])
+{
+	//return 0 if no rotation is possible
+	//return 1 if left rotation is possible
+	//return 2 if right rotation is possible
+	//return 3 if both rotations are possible, in that case, left rotation is executed
+	return 0;
+}
+
+void line_rotate(cuadrado mat [posancho][posalto], int current_block[4][2], int spin_direction)
+{
+	//here we rotate to left or right the line
+}

@@ -92,7 +92,7 @@ int main()
         SDL_Delay(200);
         SDL_SetRenderDrawColor(renderer,100,100,100,255);
         SDL_RenderClear(renderer);
-        keyboard_reading(screenSurface,window, ev_control, matrix, current_block);
+        keyboard_reading(screenSurface,window, ev_control, matrix, current_block,block_type);
         SDL_Delay(10);
     }
     cerrar(window,screenSurface);
