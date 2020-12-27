@@ -12,7 +12,7 @@ struct cuadrado{
 };
 typedef struct cuadrado cuadrado;
 
-cuadrado crear_cuadrado(int x,int y,int r, int g, int b, cuadrado mat[posalto][posancho])
+cuadrado crear_cuadrado(int x,int y,int r, int g, int b, cuadrado mat[posancho][posalto])
 {
     mat[x][y].r=r;
     mat[x][y].g=g;

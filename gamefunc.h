@@ -7,8 +7,9 @@
 #include "L.h"
 #define LEFT 1
 #define RIGHT 2
-
-
+#define ROTATE 3
+#define L_BLOCK 4
+#define LINE_BLOCK 5
 
 //Prototypes
 void single_move(cuadrado mat[posancho][posalto],int x, int y, int next_x, int next_y);
@@ -31,12 +32,15 @@ void keyboard_reading(SDL_Surface *screenSurface, SDL_Window *window, SDL_Event 
                     {
                         move(mat, current_block,LEFT);
                     }
-                    else{
-                        if(ev_control.key.keysym.sym == SDLK_RIGHT)
-                        {
-                            move(mat, current_block, RIGHT);
-                        }
+                    else if(ev_control.key.keysym.sym == SDLK_RIGHT)
+                    {
+                    	move(mat, current_block, RIGHT);
                     }
+		    else if(ev_control.key.keysym.sym == SDLK_UP)
+		    {
+		    	move(mat,current_block,ROTATE);
+		    }
+                    
                 }
             }
 }
@@ -129,6 +133,7 @@ void readMatrix(cuadrado mat[posancho][posalto])
         }
         printf("\n");
     }
+    printf("\n");
 }
 bool gravity2(cuadrado mat[posancho][posalto], int current_line_position[4][2])
 {
@@ -199,7 +204,7 @@ void create_random_block(cuadrado mat[posalto][posancho])
     crear_cuadrado(rand() % posancho,0,255,255,255,mat);
 }
 
-void dibujar_matriz(SDL_Renderer *renderer,cuadrado mat[posalto][posancho])
+void dibujar_matriz(SDL_Renderer *renderer,cuadrado mat[posancho][posalto])
 {
     int x;
     int y;
