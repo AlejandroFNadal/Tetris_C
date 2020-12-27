@@ -1,4 +1,5 @@
 #include "square.h"
+
 typedef struct line line;
 
 struct line{

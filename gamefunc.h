@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include "line.h"
+#include "L.h"
 #define LEFT 1
 #define RIGHT 2
 

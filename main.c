@@ -65,10 +65,11 @@ int main()
         printf("Falling %d\n", falling);
         if(!falling) // a new figure is required
         {
-            create_line(matrix,current_line_position);
-            is_line_going_down=true;
+            //create_line(matrix,current_line_position);
+            //is_line_going_down=true;
             //crear_cuadrado(2, 0, 255,255,255,matrix);
-            falling = true;
+	    create_L(matrix,current_line_position);
+	    falling = true;
         }
         borders(renderer);
         printf("Start of loop\n");

@@ -1,6 +1,9 @@
 
 Create rectangle of game border
-First, create random block at top
+First, create random object at top
 Make it fall
 
 When a row is complete, just move everything one square down
+
+TODO: Allow for line rotation
+TODO: Create objects T, S, and line

@@ -1,3 +1,6 @@
+#ifndef SQUARE_H
+#define SQUARE_H
+
 struct cuadrado{
     int r;
     int g;
@@ -34,3 +37,5 @@ cuadrado nullyfy_square(cuadrado a)
     a.moving=false;
     return a;
 }
+
+#endif
