@@ -11,6 +11,7 @@
 #define L_BLOCK 4
 #define LINE_BLOCK 5
 
+
 //Prototypes
 void single_move(cuadrado mat[posancho][posalto],int x, int y, int next_x, int next_y);
 void move(cuadrado mat[posancho][posalto], int current_block[4][2], int where, int block_type); //LEFT = 1, RIGHT = 2
@@ -67,30 +68,35 @@ void move(cuadrado mat[posancho][posalto],int current_block[4][2],int where,int 
 	}
         
     }
-    if(move_posible)
+    if(move_posible && where < ROTATE) //left or right
+    {
+    	for(int k = 0; k < 4; k++) // copy every block to be moved and destroy originals
         {
-            for(int k = 0; k < 4; k++) // copy every block to be moved and destroy originals
+            int temp_x = current_block[k][0];
+            int temp_y = current_block[k][1];
+	    temp_block[k]=mat[temp_x][temp_y];
+            mat[temp_x][temp_y] = nullyfy_square(mat[temp_x][temp_y]);
+        }
+        for(int k = 0; k < 4; k++)
+	{
+            int temp_x = current_block[k][0];
+            int temp_y = current_block[k][1];
+            if(where == LEFT)
             {
-                int temp_x = current_block[k][0];
-                int temp_y = current_block[k][1];
-                temp_block[k]=mat[temp_x][temp_y];
-                mat[temp_x][temp_y] = nullyfy_square(mat[temp_x][temp_y]);
+                mat[temp_x-1][temp_y]=temp_block[k]; //move block to the left
+                current_block[k][0]--; //change reference position value
             }
-            for(int k = 0; k < 4; k++)
-            {
-                int temp_x = current_block[k][0];
-                int temp_y = current_block[k][1];
-                if(where == LEFT)
-                {
-                    mat[temp_x-1][temp_y]=temp_block[k]; //move block to the left
-                    current_block[k][0]--; //change reference position value
-                }
-                else if (where == RIGHT){
-                    mat[temp_x+1][temp_y]=temp_block[k]; // move block to the right
-                    current_block[k][0]++; // change reference position value
-                }
+            else if (where == RIGHT){
+                mat[temp_x+1][temp_y]=temp_block[k]; // move block to the right
+                current_block[k][0]++; // change reference position value
             }
         }
+    }
+    if(move_posible && where == ROTATE)
+    {
+    	line_rotate(mat,current_block,LEFT,LINE_VERTICAL); //test values
+    }
+
     
     
     
