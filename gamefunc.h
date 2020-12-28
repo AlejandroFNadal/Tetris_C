@@ -5,8 +5,7 @@
 #include <stdbool.h>
 #include "line.h"
 #include "L.h"
-#define LEFT 1
-#define RIGHT 2
+
 #define ROTATE 3
 #define L_BLOCK 4
 #define LINE_BLOCK 5
@@ -14,10 +13,10 @@
 
 //Prototypes
 void single_move(cuadrado mat[posancho][posalto],int x, int y, int next_x, int next_y);
-void move(cuadrado mat[posancho][posalto], int current_block[4][2], int where, int block_type); //LEFT = 1, RIGHT = 2
+void move(cuadrado mat[posancho][posalto], int current_block[4][2], int where, int block_type, int *current_inclination); //LEFT = 1, RIGHT = 2
 
 
-void keyboard_reading(SDL_Surface *screenSurface, SDL_Window *window, SDL_Event ev_control, cuadrado mat[posancho][posalto], int current_block[4][2], int block_type)
+void keyboard_reading(SDL_Surface *screenSurface, SDL_Window *window, SDL_Event ev_control, cuadrado mat[posancho][posalto], int current_block[4][2], int block_type, int *current_inclination)
 {
     while(SDL_PollEvent(&ev_control)){
                 if(ev_control.type == SDL_KEYDOWN)
@@ -31,21 +30,21 @@ void keyboard_reading(SDL_Surface *screenSurface, SDL_Window *window, SDL_Event 
                     }
                     if(ev_control.key.keysym.sym==SDLK_LEFT)
                     {
-                        move(mat, current_block,LEFT,block_type);
+                        move(mat, current_block,LEFT,block_type, NULL);
                     }
                     else if(ev_control.key.keysym.sym == SDLK_RIGHT)
                     {
-                    	move(mat, current_block, RIGHT,block_type);
+                    	move(mat, current_block, RIGHT,block_type, NULL);
                     }
 		    else if(ev_control.key.keysym.sym == SDLK_UP)
 		    {
-		    	move(mat,current_block,ROTATE,block_type);
+		    	move(mat,current_block,ROTATE,block_type, current_inclination);
 		    }
                     
                 }
             }
 }
-void move(cuadrado mat[posancho][posalto],int current_block[4][2],int where,int block_type)
+void move(cuadrado mat[posancho][posalto],int current_block[4][2],int where,int block_type, int *current_inclination)
 {
     cuadrado temp_block[4];
     bool move_posible = true; //assuming this, then, checking if cannot be done
@@ -94,7 +93,7 @@ void move(cuadrado mat[posancho][posalto],int current_block[4][2],int where,int 
     }
     if(move_posible && where == ROTATE)
     {
-    	line_rotate(mat,current_block,LEFT,LINE_VERTICAL); //test values
+    	line_rotate(mat,current_block,LEFT,current_inclination); //test values
     }
 
     

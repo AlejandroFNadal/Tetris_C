@@ -1,4 +1,6 @@
 
+#define LEFT 1
+#define RIGHT 2
 const int width = 800;
 const int height = 600;
 const int posancho=12;

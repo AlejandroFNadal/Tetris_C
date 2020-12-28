@@ -20,17 +20,16 @@ int main()
 {
     cuadrado matrix[posancho][posalto];
     time_t t;
-    int x, y;
-    int n = 0;
+    
     bool falling= false;
     bool quit = false;
-    bool create_new_figure= true;
+    
     srand((unsigned)time(&t));
-    bool is_line_going_down = false;
+    int current_inclination; 
     //empty matrix
-    for(x=0;x<posancho;x++)
+    for(int x=0;x<posancho;x++)
     {
-        for(y=0;y<posalto;y++)
+        for(int y=0;y<posalto;y++)
         {
             matrix[x][y].r=0;
             matrix[x][y].g=0;
@@ -73,7 +72,8 @@ int main()
 	    }
 	    else if(block_type == LINE_BLOCK)
             {
-		    create_line(matrix,current_block);
+		create_line(matrix,current_block);
+		current_inclination = LINE_VERTICAL;
 	    }
             falling = true;
         }
@@ -92,7 +92,7 @@ int main()
         SDL_Delay(200);
         SDL_SetRenderDrawColor(renderer,100,100,100,255);
         SDL_RenderClear(renderer);
-        keyboard_reading(screenSurface,window, ev_control, matrix, current_block,block_type);
+        keyboard_reading(screenSurface,window, ev_control, matrix, current_block,block_type,&current_inclination);
         SDL_Delay(10);
     }
     cerrar(window,screenSurface);
