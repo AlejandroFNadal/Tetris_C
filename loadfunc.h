@@ -34,7 +34,6 @@ void cerrar(SDL_Window *window, SDL_Surface *screenSurface)
     window=NULL;
     SDL_FreeSurface(screenSurface);
     screenSurface= NULL;
-  
     //Quit SDL subsystems
     SDL_Quit();
 }

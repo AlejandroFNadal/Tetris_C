@@ -1,3 +1,5 @@
+#include <stdbool.h>
+#include "constants.h"
 #ifndef SQUARE_H
 #define SQUARE_H
 

@@ -1,4 +1,5 @@
-
+#ifndef CONSTANTS_H
+#define CONSTANTS_H
 #define LEFT 1
 #define RIGHT 2
 const int width = 800;
@@ -12,3 +13,4 @@ const int finmatriz_y=550;
 
 int cuadrado_ancho=(int)(finmatriz_x -inimatriz_x)/posancho;
 int cuadrado_alto=(int)(finmatriz_y - inimatriz_y)/posalto;
+#endif

@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <SDL2/SDL.h>
 #include <stdlib.h>
-#include <stdbool.h>
 #include <time.h>
 #include "gamefunc.h"
 

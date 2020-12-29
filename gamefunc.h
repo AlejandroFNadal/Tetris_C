@@ -36,10 +36,10 @@ void keyboard_reading(SDL_Surface *screenSurface, SDL_Window *window, SDL_Event 
                     {
                     	move(mat, current_block, RIGHT,block_type, NULL);
                     }
-		    else if(ev_control.key.keysym.sym == SDLK_UP)
-		    {
-		    	move(mat,current_block,ROTATE,block_type, current_inclination);
-		    }
+                    else if(ev_control.key.keysym.sym == SDLK_UP)
+                    {
+                        move(mat,current_block,ROTATE,block_type, current_inclination);
+                    }
                     
                 }
             }
@@ -60,24 +60,23 @@ void move(cuadrado mat[posancho][posalto],int current_block[4][2],int where,int 
         {
             move_posible = false;
         }
-	//there are two possible directions to rotate
-	if(where == ROTATE && block_type == LINE_BLOCK && check_line_rotation(mat,current_block)==0)
-	{
-		move_posible= false;
-	}
-        
+        //there are two possible directions to rotate
+        if(where == ROTATE && block_type == LINE_BLOCK && check_line_rotation(mat,current_block)==0)
+        {
+            move_posible= false;
+        }
     }
     if(move_posible && where < ROTATE) //left or right
     {
-    	for(int k = 0; k < 4; k++) // copy every block to be moved and destroy originals
+        for(int k = 0; k < 4; k++) // copy every block to be moved and destroy originals
         {
             int temp_x = current_block[k][0];
             int temp_y = current_block[k][1];
-	    temp_block[k]=mat[temp_x][temp_y];
+            temp_block[k]=mat[temp_x][temp_y];
             mat[temp_x][temp_y] = nullyfy_square(mat[temp_x][temp_y]);
         }
         for(int k = 0; k < 4; k++)
-	{
+        {
             int temp_x = current_block[k][0];
             int temp_y = current_block[k][1];
             if(where == LEFT)
@@ -93,12 +92,8 @@ void move(cuadrado mat[posancho][posalto],int current_block[4][2],int where,int 
     }
     if(move_posible && where == ROTATE)
     {
-    	line_rotate(mat,current_block,LEFT,current_inclination); //test values
+        line_rotate(mat,current_block,LEFT,current_inclination); //test values
     }
-
-    
-    
-    
 }
 
 

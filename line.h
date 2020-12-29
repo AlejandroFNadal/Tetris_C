@@ -74,8 +74,8 @@ void line_rotate(cuadrado mat [posancho][posalto], int current_block[4][2], int 
 	{
 	    for(int k = 0; k < 4; k++)
 	    {
-	        mat[center_point][high_point+k] = temp_block[4];
-		current_block[k][1] = high_point + k;
+	        mat[center_point][high_point+k] = temp_block[k];
+            current_block[k][1] = high_point + k;
 	    	current_block[k][0] = center_point;
 	    }
 	    *current_inclination = LINE_VERTICAL;
