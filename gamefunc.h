@@ -40,7 +40,7 @@ void keyboard_reading(SDL_Surface *screenSurface, SDL_Window *window, SDL_Event 
                     {
                         move(mat,current_block,ROTATE,block_type, current_inclination);
                     }
-                    
+
                 }
             }
 }
@@ -92,7 +92,14 @@ void move(cuadrado mat[posancho][posalto],int current_block[4][2],int where,int 
     }
     if(move_posible && where == ROTATE)
     {
-        line_rotate(mat,current_block,LEFT,current_inclination); //test values
+        printf("In move, move possible and rotation\n");
+        if(block_type == LINE_BLOCK){
+            line_rotate(mat,current_block,LEFT,current_inclination);
+        }
+        else if(block_type == L_BLOCK)
+        {
+            L_rotate(mat,current_block,LEFT,current_inclination);
+        }
     }
 }
 
@@ -128,18 +135,7 @@ void detect_full_bottom(cuadrado mat[posancho][posalto])
         }
     }
 }
-void readMatrix(cuadrado mat[posancho][posalto])
-{
-    for(int x = 0; x < posancho; x++)
-    {
-        for(int y = 0; y < posalto;y++)
-        {
-            printf(" %d", mat[x][y].active);
-        }
-        printf("\n");
-    }
-    printf("\n");
-}
+
 bool gravity2(cuadrado mat[posancho][posalto], int current_line_position[4][2])
 {
     bool stop_object = false;

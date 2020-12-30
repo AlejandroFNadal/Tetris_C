@@ -5,6 +5,7 @@
 #include "gamefunc.h"
 
 
+
 SDL_Window* window = NULL;
 SDL_Surface* screenSurface = NULL;
 SDL_Event ev_control;
@@ -60,14 +61,15 @@ int main()
     
     while(!quit)
     {
-        printf("Falling %d\n", falling);
+        //printf("Falling %d\n", falling);
         if(!falling) // a new figure is required
         {
 	    //decide block type
 	    block_type=rand()%2 + 4;
 	    if(block_type == L_BLOCK)
 	    {
-		create_L(matrix,current_block);
+            create_L(matrix,current_block);
+            current_inclination = L_ON_L;
 	    }
 	    else if(block_type == LINE_BLOCK)
             {
@@ -81,10 +83,10 @@ int main()
         //readMatrix(matrix);
         falling = gravity2(matrix,current_block);
         //printf("After gravity applied\n");
-        readMatrix(matrix);
+        //readMatrix(matrix);
         detect_full_bottom(matrix);
         //printf("After detection of full bottom\n");
-        readMatrix(matrix);
+        //readMatrix(matrix);
         SDL_SetRenderDrawColor(renderer,255,255,255,255);
         dibujar_matriz(renderer,matrix);
         SDL_RenderPresent(renderer);
