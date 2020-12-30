@@ -33,7 +33,52 @@ void cerrar(SDL_Window *window, SDL_Surface *screenSurface)
     SDL_DestroyWindow(window);
     window=NULL;
     SDL_FreeSurface(screenSurface);
-    screenSurface= NULL;
     //Quit SDL subsystems
     SDL_Quit();
+}
+
+int detect_high_point(int block[4][2])
+{
+    int high_point = 100000;
+    for(int i =0;i<4;i++)
+    {
+        if(block[i][1] < high_point){
+            high_point=block[i][1];
+        }
+    }
+    return high_point;
+}
+int detect_low_point(int block[4][2])
+{
+    int low_point = 0;
+    for(int i =0;i<4;i++)
+    {
+        if(block[i][1] > low_point){
+            low_point=block[i][1];
+        }
+    }
+    return low_point;
+}
+int detect_left_point(int block[4][2])
+{
+    int left_point = 100000;
+    for(int i =0;i<4;i++)
+    {
+        if(block[i][0] < left_point){
+            left_point=block[i][0];
+        }
+    }
+    return left_point;
+}
+
+int detect_right_point(int block[4][2])
+{
+    int right_point = 0;
+    for(int i =0;i<4;i++)
+    {
+        if(block[i][0] > right_point){
+            right_point=block[i][0];
+        }
+    }
+    return right_point;
 }

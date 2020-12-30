@@ -5,5 +5,10 @@ Make it fall
 
 When a row is complete, just move everything one square down
 
-TODO: Allow for line rotation
-TODO: Create objects T, S, and line
+
+TODO: Create objects T, S
+TODO: Allow for L line rotation
+TODO: allow higher row elimination
+TODO: Add title above
+TODO: Calculate points
+TODO: Create Main Menu

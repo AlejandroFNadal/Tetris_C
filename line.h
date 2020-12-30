@@ -33,7 +33,6 @@ int check_line_rotation(cuadrado mat[posancho][posalto],int current_block[4][2])
 	//return 0 if no rotation is possible
 	//return 1 if left rotation is possible
 	//return 2 if right rotation is possible
-	//return 3 if both rotations are possible, in that case, left rotation is executed
 	return 1;
 }
 
